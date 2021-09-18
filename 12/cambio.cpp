@@ -1,54 +1,46 @@
 #include <cstdlib>
 #include <iostream>
+#include <array>
 using namespace std;
 
-/****VARIABLES****/
-int arrayBilletesMonedasEnCentimos[7] = {50000, 20000, 10000, 5000, 2000, 1000, 500};
+array<int, 7> billetes = {500, 200, 100, 50, 20, 10, 5};
+array<int, 7> monedas = {2, 1};
 
-int arrayContadorBilletes[2] = {500, 200};
-
+// Definición funciones
+int ObtenerCantidad(string tipo, int monto, int billete)
+{
+    int cantidadBilletes = monto / billete;
+    cout << "Cantidad " << tipo << " de " << billete << ": " << cantidadBilletes << "\n";
+    return cantidadBilletes;
+}
 
 /****FUNCION MAIN****/
 int main()
 {
-    int pesetas = 0;
-    int centimosDeEuro = 0;
+    int cantidad = 0;
+    int billete = 0;
+    cout << "Introduzca cantidad de Euros ";
+    cin >> cantidad;
 
-    pesetas = ObtenerPesetasDelUsuario();
-    centimosDeEuro = CambioPesetasCentimosDeEuros(pesetas);
-    float euros = centimosDeEuro / 100;
-
-    cout << endl
-         << pesetas << " pesetas son " << euros << "euros." << endl;
-
-    ObtenerCambio(centimosDeEuro);
-
-    .....
-}
-
-/***DEFINICION FUNCIONES***/
-unsigned int ObtenerPesetasDelUsuario()
-{
-    cout << "pon pesetas" << endl;
-    cin >> pesetas;
-    return pesetas;
-}
-
-unsigned int CambioPesetasCentimosDeEuros(pesetas)
-{
-    centimosEuro = pesetas * 0.60;
-    return centimosEuro;
-}
-
-void ObtenerCambio(centimosEuro)
-{
-    for (int i = 0; centimosEuro != 0; ++i)
+    // obtener billetes
+    for (int i = 0; i < billetes.size(); i++)
     {
-        if (arrayBMEC[i] >= centimosEuro)
+        if (cantidad >= billetes[i])
         {
-
-            centimosEuro -= arrayBMEC[i];
-            arrayCB[i] += 1;
+            int cantidadBilletes = ObtenerCantidad("billetes", cantidad, billetes[i]);
+            cantidad -= (cantidadBilletes * billetes[i]);
         }
     }
+
+    // obtener monedas
+    for (int i = 0; i < monedas.size(); i++)
+    {
+        if (cantidad >= monedas[i])
+        {
+            int cantidadMonedas = ObtenerCantidad("monedas", cantidad, monedas[i]);
+            cantidad -= (cantidadMonedas * monedas[i]);
+        }
+    }
+
+    return EXIT_SUCCESS;
 }

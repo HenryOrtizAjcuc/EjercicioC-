@@ -14,7 +14,7 @@ void registrarCliente()
 {
     for (size_t i = 0; i < registros; i++)
     {
-        cout << "Ingrese datos del estudiante\n";
+        cout << "Ingrese datos del cliente\n";
         cout << "Ingrese nombre: \n";
         cin >> clientes[i].nombre;
         cout << "Ingrese dpi: \n";
